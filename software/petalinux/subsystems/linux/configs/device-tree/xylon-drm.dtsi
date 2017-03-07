@@ -1,0 +1,99 @@
+/*
+ *  Copyright (C) 2011 - 2014 Xilinx
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&amba {
+	logiclk_0: clock-generator@40020000 {
+		compatible = "xylon,logiclk-1.02.b";
+		reg = <0x40020000 0x1000>;
+		bandwidth-high;
+		input-frequency = <100000000>;
+		input-divide = <1>;
+		input-multiply = <9>;
+		input-phase = <0>;
+		precise-output = <&clkout_0>;
+		clkout_0: output_0 {
+			#clock-cells = <0>;
+			frequency = <74250000>;
+			divide = <6>;
+			duty = <50000>;
+			phase = <0>;
+		};
+		clkout_1: output_1 {
+			#clock-cells = <0>;
+			frequency = <148500000>;
+			divide = <9>;
+			duty = <50000>;
+			phase = <0>;
+		};
+		clkout_2: output_2 {
+			#clock-cells = <0>;
+			frequency = <30000000>;
+			divide = <9>;
+			duty = <50000>;
+			phase = <0>;
+		};
+		clkout_3: output_3 {
+			#clock-cells = <0>;
+			frequency = <40000000>;
+			divide = <9>;
+			duty = <50000>;
+			phase = <0>;
+		};
+		clkout_4: output_4 {
+			#clock-cells = <0>;
+			frequency = <50000000>;
+			divide = <9>;
+			duty = <50000>;
+			phase = <0>;
+		};
+		clkout_5: output_5 {
+			#clock-cells = <0>;
+			frequency = <60000000>;
+			divide = <9>;
+			duty = <50000>;
+			phase = <0>;
+		};
+	};
+
+	logicvc_1: logicvc@40030000 {
+		compatible = "xylon,logicvc-4.00.a";
+		reg = <0x40030000 0x10000>;
+		interrupt-parent = <&intc>;
+		interrupts = <0 34 4>;
+		background-layer-bits-per-pixel = <32>;
+		background-layer-type = "rgb";
+		color-space = <1>;
+		interface = <0>;
+		readable-regs;
+		size-position;
+		pixel-stride = <2048>;
+		layer_0 {
+			bits-per-pixel = <32>;
+			type = "rgb";
+			transparency = "layer";
+		};
+		layer_1 {
+			bits-per-pixel = <16>;
+			type = "yuv";
+			transparency = "layer";
+		};
+	};
+
+	xylon_drm {
+		compatible = "xylon,drm-1.00.a";
+		clocks = <&clkout_0>;
+		device = <&logicvc_1>;
+		encoder = <&adv7511>;
+		primary-plane = <0>;
+	};
+};

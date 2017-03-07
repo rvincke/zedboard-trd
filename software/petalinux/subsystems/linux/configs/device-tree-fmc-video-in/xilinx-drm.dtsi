@@ -1,0 +1,94 @@
+/*
+ *  Copyright (C) 2011 - 2014 Xilinx
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&amba {
+	vtc_2: v-tc@40010000 {
+		compatible = "xlnx,v-tc-5.01.a";
+		reg = <0x40010000 0x10000>;
+		interrupts = <0 36 4>;
+		interrupt-parent = <&intc>;
+	};
+
+	cresample_1: v-cresample@40020000 {
+		compatible = "xlnx,v-cresample-3.01.a";
+		reg = <0x40020000 0x10000>;
+		xlnx,input-format = "yuv444";
+		xlnx,output-format = "yuv422";
+	};
+
+	rgb2ycrcb_1: v-rgb2ycrcb@40030000 {
+		compatible = "xlnx,v-rgb2ycrcb-6.01.a";
+		reg = <0x40030000 0x10000>;
+	};
+
+	osd_1: v-osd@40040000 {
+		compatible = "xlnx,v-osd-5.01.a";
+		reg = <0x40040000 0x10000>;
+		xlnx,num-layers = <2>;
+		xlnx,screen-width = <1920>;
+	};
+
+	vdma_3: axivdma@40000000 {
+		compatible = "xlnx,axi-vdma-1.00.a";
+		reg = <0x40000000 0x10000>;
+
+		xlnx,flush-fsync = <1>;
+		xlnx,num-fstores = <1>;
+
+		#dma-cells = <1>;
+		dma-channel@40000000 {
+			compatible = "xlnx,axi-vdma-mm2s-channel";
+			interrupt-parent = <&intc>;
+			interrupts = <0 52 4>;
+			xlnx,datawidth = <0x40>;
+		};
+	};
+
+	vdma_4: axivdma@40050000 {
+		compatible = "xlnx,axi-vdma-1.00.a";
+		reg = <0x40050000 0x10000>;
+
+		xlnx,flush-fsync = <1>;
+		xlnx,num-fstores = <1>;
+
+		#dma-cells = <1>;
+		dma-channel@40050000 {
+			compatible = "xlnx,axi-vdma-mm2s-channel";
+			interrupt-parent = <&intc>;
+			interrupts = <0 58 4>;
+			xlnx,datawidth = <0x40>;
+		};
+	};
+
+	xilinx_drm {
+		compatible = "xlnx,drm";
+		xlnx,osd = <&osd_1>;
+		xlnx,vtc = <&vtc_2>;
+		xlnx,encoder-slave = <&adv7511>;
+		xlnx,connector-type = "HDMIA";
+		clocks = <&si570>;
+		planes {
+			xlnx,pixel-format = "yuv422";
+			plane0 {
+				dmas = <&vdma_3 0>;
+				dma-names = "dma";
+				xlnx,rgb2yuv = <&rgb2ycrcb_1>;
+				xlnx,cresample = <&cresample_1>;
+			};
+			plane1 {
+				dmas = <&vdma_4 0>;
+				dma-names = "dma";
+			};
+		};
+	};
+};

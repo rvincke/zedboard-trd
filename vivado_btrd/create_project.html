@@ -1,0 +1,31 @@
+<div style="text-align: center; margin-left: 80px;"><big><big><big><span style="font-weight: bold;">
+Xylon ZedBoard ZYNQ Base TRD - recreating project from scratch</span></big></big></big><br></div>
+
+<br><big style="font-weight: bold;">1. TCL script:</big><br>
+You can use a TCL script to recreate and run the project. When run from the command line, the script adds sources, sets properties, recreates HDL libraries and
+runs processes. You can use this script to do the following:
+<ul>
+  <li>Create a new project and run implementation or other processes from the command line</li>
+  <li>Set properties in other projects to desired values</li>
+  <li>Modify the script to change design properties, and then run processes</li>
+</ul>
+
+<br><big style="font-weight: bold;">2. How to create project from scratch? </big><br>
+<ul>
+  <li> To create/recreate project you must have evaluation license for logiCLK logicBRICKS IP core. Please contact Xylon sales for further details (<a href="mailto:support@logicbricks.com">mailto:support@logicbricks.com).</a> 
+  <li>1. Run Vivado Design Suite Tcl Shell
+   <ul>   
+      <li> Use the following command to invoke the Vivado Design suite Tcl Shell either at the Linux command prompt or within Windows cmd window:
+          <br> vivado -mode tcl <br>   </li>
+      <li>On Windows, select Start > All Programs > Xilinx Design Tools > Vivado 2014.4 > Vivado 2014.4 Tcl Shell)</li>
+      <li>Change directory  into vivado_btrd/scripts (Note: Tcl Shell uses slash "/" for positioning)</li>
+      <li> Run  following command : source project.tcl and wait for Vivado to generate project. </li>  
+   </ul>
+  <li>2. Open generated Vivado project file in vivado_btrd/project directory (vivado_zedboard_btrd.xpr file) and regenerate output products for block design, etc. 
+</ul>
+<br><br><br><br>
+<div style="text-align: justify;">
+<span style="color: rgb(128, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; background-color: rgb(255, 255, 255); font-size: medium; display: inline ! important; float: none;">
+Copyright © 2015 Xylon d.o.o. All rights reserved.
+</span>
+</div>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Project Version="1" Minor="0">
+	<BUILD_NUMBER Name="1071353"/>
+	<FULL_BUILD Name="SW Build 1071353 on Tue Nov 18 16:47:07 MST 2014"/>
+	<MODE Name="Pre-Synthesis"/>
+	<SYSTEMINFO BOARD="em.avnet.com:zed:part0:0.9" ARCH="zynq" PACKAGE="clg484" DEVICE="7z020" SPEED="-1" LUT="" FF="" BRAM="" DSP=""/>
+	<HIERARCHY Name="zedboard_btrd_i"/>
+	<File Type="PS_FSBL_INIT" Name="ps7_init.c" ModTime="1418930345"/>
+	<File Type="PS_FSBL_INIT" Name="ps7_init.h" ModTime="1418930343"/>
+	<File Type="PS_FSBL_INIT_GPL" Name="ps7_init_gpl.c" ModTime="1418930345"/>
+	<File Type="PS_FSBL_INIT_GPL" Name="ps7_init_gpl.h" ModTime="1418930343"/>
+	<File Type="PS_XMD_INIT" Name="ps7_init.tcl" ModTime="1418930345"/>
+	<File Type="PS_INIT_HELP" Name="ps7_init.html" ModTime="1418930345"/>
+	<File Type="HW_HANDOFF" Name="zedboard_btrd.hwh" ModTime="1418930423"/>
+	<File Type="BD_TCL" Name="zedboard_btrd_bd.tcl" ModTime="1418930423"/>
+</Project>
+

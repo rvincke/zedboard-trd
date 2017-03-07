@@ -1,0 +1,94 @@
+/*
+ *  Copyright (C) 2011 - 2014 Xilinx
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&amba {
+	hls_1: hls@400d0000 {
+		compatible = "xlnx,v-hls-sobel", "xlnx,v-hls";
+		reg = <0x400d0000 0x24>, <0x400d0024 0xa8>;
+		clocks = <&clkc 15>;
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+
+				xlnx,video-format = "yuv422";
+				xlnx,video-width = <8>;
+
+				hls_in: endpoint {
+					remote-endpoint = <&m2m_out>;
+				} ;
+			} ;
+			port@1 {
+				reg = <1>;
+
+				xlnx,video-format = "yuv422";
+				xlnx,video-width = <8>;
+
+				hls_out: endpoint {
+					remote-endpoint = <&m2m_in>;
+				};
+			};
+		};
+	};
+
+	vdma_2: axivdma@400b0000 {
+		compatible = "xlnx,axi-vdma-1.00.a";
+		reg = <0x400b0000 0x10000>;
+
+		xlnx,flush-fsync = <1>;
+		xlnx,num-fstores = <1>;
+
+		#dma-cells = <1>;
+		dma-channel@400b0000 {
+			compatible = "xlnx,axi-vdma-mm2s-channel";
+			interrupt-parent = <&intc>;
+			interrupts = <0 31 4>;
+			xlnx,datawidth = <0x40>;
+		};
+		dma-channel@0x400b0000 {
+			compatible = "xlnx,axi-vdma-s2mm-channel";
+			interrupt-parent = <&intc>;
+			interrupts = <0 32 4>;
+			xlnx,datawidth = <0x40>;
+		};
+	};
+
+	video_m2m {
+		compatible = "xlnx,video";
+		dmas = <&vdma_2 1>, <&vdma_2 0>;
+		dma-names = "port0", "port1";
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+				direction = "input";
+				m2m_in: endpoint {
+					remote-endpoint = <&hls_out>;
+				};
+			};
+			port@1 {
+				reg = <1>;
+				direction = "output";
+				m2m_out: endpoint {
+					remote-endpoint = <&hls_in>;
+				};
+			};
+		};
+	};
+};

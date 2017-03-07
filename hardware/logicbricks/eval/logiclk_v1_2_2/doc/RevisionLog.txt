@@ -1,0 +1,39 @@
+*****************************************************************************************
+
+logiCLK revision log
+
+*****************************************************************************************
+
+
+VERSION  |  DATE         |  DESCRIPTION
+*****************************************************************************************
+1.00.a   |  06.09.2012.  |  Initial Xylon release
+-----------------------------------------------------------------------------------------
+1.01.a   |  28.03.2013.  |  New features:
+         |               |     - Support for Spartan 6 FPGA families
+-----------------------------------------------------------------------------------------
+1.01.b   |  25.07.2013.  | Bug fix: 
+         |               |     - clk_drp module input signals LOCKED and DO sampled 
+         |               |       before state machine.
+-----------------------------------------------------------------------------------------
+1.01.c   |  20.08.2013.  | Bug fix: 
+         |               |     - PLL_ADV and PLLE2_ADV modules' parameter DIVCLK_DIVIDE
+         |               |       changed. Constant value (1) replaced with input generic
+         |               |       parameter C_DRP_DIVCLK_DIVIDE.   
+-----------------------------------------------------------------------------------------
+1.01.d   |  27.08.2013.  |     - Software reset and software reset register removed.
+         |               |      
+-----------------------------------------------------------------------------------------
+1.02.a   |  20.09.2013.  |     - Component pselect removed from axi4_lite_wrapper module.
+         |               |       Module splb_wrapper continues to utilze 
+         |               |       the pselect module. 
+-----------------------------------------------------------------------------------------
+1.02.b   |  14.11.2013.  |     - Added verification of the C_FAMILY parameter to determine
+         |               |       the root family (functions get_root_family, toLowerCaseChar 
+         |               |       and equalIgnoringCase added to clk_drp_pkg.vhd file).
+-----------------------------------------------------------------------------------------
+1.2.2    |  08.12.2014.  |    New features:
+         |               |     - IP core version naming convention modified for Vivado
+         |               |       IP-XACT package compliance. Patch level designation
+         |               |       is replaced by IP core's revision tag.
+******************************************************************************************

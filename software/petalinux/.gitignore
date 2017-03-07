@@ -1,0 +1,9 @@
+*/config.old
+build/
+components/bootloader/
+images/
+.petalinux/*
+!.petalinux/metadata
+*.o
+*.jou
+*.log
